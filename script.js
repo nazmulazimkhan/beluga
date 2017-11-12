@@ -18,32 +18,32 @@ var sliderValue = document.getElementById('slider-value');
 map.on('load', function() {
     map.addSource('BelugaGen_HobSunFsr', {
                     'type': 'geojson',
-                    'data': './GeoJSON/Beluga Geojson/BelugaGen_HobSunFsr.GeoJSON'
+                    'data': './GeoJSON/BelugaGen_HobSunFsr.GeoJSON'
                 })
     ,
     map.addSource('BelugaGen_HobSun', {
                     'type': 'geojson',
-                    'data': './GeoJSON/Beluga Geojson/BelugaGen_HobSun.GeoJSON'
+                    'data': './GeoJSON/BelugaGen_HobSun.GeoJSON'
                 })
     ,
     map.addSource('BelugaGen_Fsr', {
                     'type': 'geojson',
-                    'data': './GeoJSON/Beluga Geojson/BelugaGen_Fsr.GeoJSON'
+                    'data': './GeoJSON/BelugaGen_Fsr.GeoJSON'
                 })
     ,
     map.addSource('BelugaGen_fsr_plus5', {
                     'type': 'geojson',
-                    'data': './GeoJSON/Beluga Geojson/BelugaGen_fsr_plus5.GeoJSON'
+                    'data': './GeoJSON/BelugaGen_fsr_plus5.GeoJSON'
                 })
     ,
     map.addSource('BelugaGen_fsr7_Hob30', {
                     'type': 'geojson',
-                    'data': './GeoJSON/Beluga Geojson/BelugaGen_fsr7_Hob30.GeoJSON'
+                    'data': './GeoJSON/BelugaGen_fsr7_Hob30.GeoJSON'
                 })    
     ,
     map.addSource('BelugaGen_random1', {
                     'type': 'geojson',
-                    'data': './GeoJSON/Beluga Geojson/BelugaGen_random1.GeoJSON'
+                    'data': './GeoJSON/BelugaGen_random1.GeoJSON'
                 })    
     // ,
 //     var draw = new MapboxDraw({
