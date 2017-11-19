@@ -1,10 +1,8 @@
 # Beluga
-Laws are a codification of a society’s norms. They capture the current state of those norms in a way that can be communicated and interpreted with some degree of consistency. Programming languages do a very similar job; they capture a set of operations and decisions in a way that can be consistently executed. Beluga explores the benefits of capturing law in programming languages, and demonstrates how it can be applied to urban planning laws through a script which generates permisible building envelopes. <br>
-
-In Sydney, the current Local Environmental Plan (LEP) is provided online with in excess of 100 documents. Like the majority of zoning maps that exist, they are “two-dimensional and fail to provide a clear picture of the code’s impact on development” (Didech, 2015). This makes it difficult for architects and property developers to understand the different regulations that are set. For example, the LEP includes the maximum Height of Building (HOB), and the Floor Space Ratio (FSR) for each lot, which both factor into the maximum allowed height of a building. Councils are tasked with defining regulations that need to be applied on a large scale, without being able to evaluate in detail, the efficiency of the proposed regulations.
-Beluga is a tool, developed by the authors, to show how law as code can support a better experience for both designers and policy makers. Using LEP controls and associating them with cadastral lot geometry, 3D legal forms can be generated. The tool uses building regulations to generate 3D forms which represent the maximum buildable space. We refer to these as permissible building envelopes.The LEP controls specified are changeable parameters, allowing the impact of alterations to be seen in real time. 
-Beluga was created using Rhino 3D, which is a 3D Computer-aided design program. Together with Grasshopper, a visual scripting language for Rhino3D, it allows designers “to specify a sequence of relationships and operations to automate the construction of geometry. Ideally the visual script facilitates the exploration of design options by allowing the designer to change the inputs to the script and thereby sculpt the geometry into the desired shape” (Davis, Burry, et al., 2011).  
-
-
-#### Links
-Beluga Iterations: https://nazmulazimkhan.github.io/beluga/
+Laws are a codification of a society’s norms. They capture the current state of those norms in a way that can be communicated and interpreted with some degree of consistency. Programming languages do a very similar job; they capture a set of operations and decisions in a way that can be consistently executed. Beluga explores the benefits of capturing law in programming languages, and demonstrates how it can be applied to urban planning laws.<br>
+<br>
+Beluga is a scriptloped to support a better experience for both designers and policy makers. Using LEP controls and associating them with cadastral lot geometry, 3D legal forms can be generated. The script building regulations to generate 3D forms which represent the maximum buildable space. We refer to these as permissible building envelopes. The LEP controls specified are changeable parameters, allowing the impact of alterations to be seen in real time. 
+<br>
+The following website allows you to explore some of the iterations generated from Beluga: 
+<br>
+https://nazmulazimkhan.github.io/beluga/
