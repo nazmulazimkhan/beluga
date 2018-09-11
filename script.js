@@ -11,90 +11,17 @@ var map = new mapboxgl.Map({
     container: 'map'
 });
 
-//SLIDER
-var slider = document.getElementById('slider');
-var sliderValue = document.getElementById('slider-value');
-//END SLIDER
+//LOAD GEOJSON
 map.on('load', function() {
     map.addSource('BelugaGen_HobSunFsr', {
                     'type': 'geojson',
                     'data': './GeoJSON/BelugaGen_HobSunFsr.GeoJSON'
                 })
-    ,
-    map.addSource('BelugaGen_HobSun', {
-                    'type': 'geojson',
-                    'data': './GeoJSON/BelugaGen_HobSun.GeoJSON'
-                })
-    ,
-    map.addSource('BelugaGen_Fsr', {
-                    'type': 'geojson',
-                    'data': './GeoJSON/BelugaGen_Fsr.GeoJSON'
-                })
-    ,
-    map.addSource('BelugaGen_fsr_plus5', {
-                    'type': 'geojson',
-                    'data': './GeoJSON/BelugaGen_fsr_plus5.GeoJSON'
-                })
-    ,
-    map.addSource('BelugaGen_fsr7_Hob30', {
-                    'type': 'geojson',
-                    'data': './GeoJSON/BelugaGen_fsr7_Hob30.GeoJSON'
-                })    
-    ,
-    map.addSource('BelugaGen_random1', {
-                    'type': 'geojson',
-                    'data': './GeoJSON/BelugaGen_random1.GeoJSON'
-                })    
-    // ,
-//     var draw = new MapboxDraw({
-//     displayControlsDefault: false,
-//     controls: {
-//         polygon: true,
-//         trash: true
-//     }
-// });
-// map.addControl(draw);
-
-// var calcButton = document.getElementById('calculate');
-// calcButton.onclick = function() {
-//     var data = draw.getAll();
-//     if (data.features.length > 0) {
-//         var area = turf.area(data);
-//         // restrict to area to 2 decimal points
-//         var rounded_area = Math.round(area*100)/100;
-//         var answer = document.getElementById('calculated-area');
-//         answer.innerHTML = '<p><strong>' + rounded_area + '</strong></p><p>square meters</p>';
-//     } else {
-//         alert("Use the draw tools to draw a polygon!");
-//     }
-// };
 
 
-    //     map.addLayer({
-    //     'id': '3d-buildings',
-    //     'source': 'composite',
-    //     'source-layer': 'building',
-    //     'filter': ['==', 'extrude', 'true'],
-    //     'type': 'fill-extrusion',
-    //     'paint': {
-    //         'fill-extrusion-color': '#aaa',
-    //         'fill-extrusion-height': {
-    //             'type': 'identity',
-    //             'property': 'height'
-    //         },
-    //         'fill-extrusion-base': {
-    //             'type': 'identity',
-    //             'property': 'min_height'
-    //         },
-    //         'fill-extrusion-opacity': .6
-    //     }
-    // });
-
-
-
-
+//ADD LAYER TO MAP
     map.addLayer({
-        "id": "Iteration1",
+        "id": "buildingEnvelopes",
         "type": "fill-extrusion",
         "source": "BelugaGen_HobSunFsr",
            'paint': {
@@ -110,215 +37,98 @@ map.on('load', function() {
                     'type': 'identity',
                     'property': 'base_height'
                 },
-                 // 'fill-extrusion-opacity': .6
-            }
-    });
-    map.addLayer({
-        "id": "Iteration2",
-        "type": "fill-extrusion",
-        "source": "BelugaGen_HobSun",
-           'paint': {
-                'fill-extrusion-color' : {
-                    'property': 'colour',
-                    'type': 'identity'
-                },
-                'fill-extrusion-height' : {
-                    'type': 'identity',
-                    'property': 'height'
-                },
-                'fill-extrusion-base' : {
-                    'type': 'identity',
-                    'property': 'base_height'
-                },
-                 // 'fill-extrusion-opacity': .6
-            }
-    }); 
-    
-    map.addLayer({
-        "id": "Iteration3",
-        "type": "fill-extrusion",
-        "source": "BelugaGen_Fsr",
-           'paint': {
-                'fill-extrusion-color' : {
-                    'property': 'colour',
-                    'type': 'identity'
-                },
-                'fill-extrusion-height' : {
-                    'type': 'identity',
-                    'property': 'height'
-                },
-                'fill-extrusion-base' : {
-                    'type': 'identity',
-                    'property': 'base_height'
-                },
-                 // 'fill-extrusion-opacity': .6
-            }
-    });
-    map.addLayer({
-        "id": "Iteration4",
-        "type": "fill-extrusion",
-        "source": "BelugaGen_fsr_plus5",
-           'paint': {
-                'fill-extrusion-color' : {
-                    'property': 'colour',
-                    'type': 'identity'
-                },
-                'fill-extrusion-height' : {
-                    'type': 'identity',
-                    'property': 'height'
-                },
-                'fill-extrusion-base' : {
-                    'type': 'identity',
-                    'property': 'base_height'
-                },
-                 // 'fill-extrusion-opacity': .6
+                 'fill-extrusion-opacity': .5
             }
     });
 
-    map.addLayer({
-        "id": "Iteration5",
-        "type": "fill-extrusion",
-        "source": "BelugaGen_fsr7_Hob30",
-           'paint': {
-                'fill-extrusion-color' : {
-                    'property': 'colour',
-                    'type': 'identity'
-                },
-                'fill-extrusion-height' : {
-                    'type': 'identity',
-                    'property': 'height'
-                },
-                'fill-extrusion-base' : {
-                    'type': 'identity',
-                    'property': 'base_height'
-                },
-                 // 'fill-extrusion-opacity': .6
-            }
-    });
+//LIST OF LayerIDs and Display Text
+var toggleableLayerIds = ['buildingEnvelopes'];
+var toggleableLayerText = ['envelopes'];
 
-    map.addLayer({
-        "id": "Iteration6",
-        "type": "fill-extrusion",
-        "source": "BelugaGen_random1",
-           'paint': {
-                'fill-extrusion-color' : {
-                    'property': 'colour',
-                    'type': 'identity'
-                },
-                'fill-extrusion-height' : {
-                    'type': 'identity',
-                    'property': 'height'
-                },
-                'fill-extrusion-base' : {
-                    'type': 'identity',
-                    'property': 'base_height'
-                },
-                 // 'fill-extrusion-opacity': .6
-            }
-    });
-//SLIDER
-slider.addEventListener('input', function(e) {
-        map.setPaintProperty('Iteration1', 'fill-extrusion-opacity', parseInt(e.target.value, 10) / 100);
-        map.setPaintProperty('Iteration2', 'fill-extrusion-opacity', parseInt(e.target.value, 10) / 100);
-        map.setPaintProperty('Iteration3', 'fill-extrusion-opacity', parseInt(e.target.value, 10) / 100);
-        map.setPaintProperty('Iteration4', 'fill-extrusion-opacity', parseInt(e.target.value, 10) / 100);
-        map.setPaintProperty('Iteration5', 'fill-extrusion-opacity', parseInt(e.target.value, 10) / 100);
-        map.setPaintProperty('Iteration6', 'fill-extrusion-opacity', parseInt(e.target.value, 10) / 100);
-        sliderValue.textContent = e.target.value + '%';
-    });
-//END SLIDER
+//TOGGLE
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+    var id = toggleableLayerIds[i];
+    var idText= toggleableLayerText[i];
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = 'active';
+    link.textContent = idText;
+    link.textId = id;
 
-map.setLayoutProperty('Iteration1','visibility','visible');
-map.setLayoutProperty('Iteration2','visibility','none');
-map.setLayoutProperty('Iteration3','visibility','none');
-map.setLayoutProperty('Iteration4','visibility','none');
-map.setLayoutProperty('Iteration5','visibility','none');
-map.setLayoutProperty('Iteration6','visibility','none');
+    link.onclick = function (e) {
+        var clickedLayer = this.textId;
+        e.preventDefault();
+        e.stopPropagation();
 
-//console.log(map.getLayoutProperty('Iteration1','visibility'));
+        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
 
-var nazzzz = map.getLayoutProperty('Iteration1','visibility');
-// console.log(nazzzz)
-//     if (nazzzz === 'visible'){
-//         nazzzz.className='active';
-//         console.log("active")
-//        } else{
-//         nazzzz.className='none';
-//         console.log("jks")
-//         };
-});
+        if (visibility === 'visible') {
+            map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+            this.className = '';
+        } else {
+            this.className = 'active';
+            map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        }
+    };
 
-var toggleableLayerIds = ['Iteration1','Iteration2','Iteration3','Iteration4','Iteration5','Iteration6']; //'Iteration1', 'Iteration2',
+    var layers = document.getElementById('menu');
+    layers.appendChild(link);
+}
 
-// var link = document.createElement('a');
-// console.log(link)
-    
+// map.addControl(new mapboxgl.NavigationControl());
+// POP UP TeXT
 
-var buttonAdder =  function(value, index, array){
-        var id = value;
-        var link = document.createElement('a');
-        link.href = '#';
+// map.on('click', function (e) {
+//     var features = map.queryRenderedFeatures(e.point, { layers: ['buildingEnvelopes'] });
+//     if (!features.length) {
+//         return;
+//     }
 
-        if(index==0){
-        link.className = 'active';
-        }else{
-        link.className = '';
-        };
+//     var feature = features[0];
+//     var feat = features.length;
 
-        link.textContent = id;
-        // console.log(link.textContent)
-        link.onclick = function (e) {
-            var clickedLayer = this.textContent;
-             e.preventDefault();
-             e.stopPropagation();
+//     var popup = new mapboxgl.Popup()
+//         .setLngLat(map.unproject(e.point))
+//         .setHTML(feature.properties.tag)
+//         .addTo(map);
 
-            var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+// // Use the same approach as above to indicate that the symbols are clickable
+// // by changing the cursor style to 'pointer'.
+// map.on('mousemove', function (e) {
+//     var features = map.queryRenderedFeatures(e.point, { layers: ['buildingEnvelopes'] });
+//     map.getCanvas().style.cursor = feat ? 'pointer' : '';
+// });
 
-            if (visibility === 'visible') {
-                map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-                nazzzz= "dwadwda"
-                this.className = '';
-            } else {
-                this.className = 'active';
-                map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-            }
-        };
 
-        var layers = document.getElementById('menu');
-        layers.appendChild(link);
-    }
+   // map.on('click', 'buildingEnvelopes', function (e) {
+   //      var coordinates = e.features[0].geometry.coordinates.slice();
+   //      var description = e.features[0].properties.tag;
 
-toggleableLayerIds.map(buttonAdder)
+   //      // Ensure that if the map is zoomed out such that multiple
+   //      // copies of the feature are visible, the popup appears
+   //      // over the copy being pointed to.
+   //      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+   //          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+   //      }
+
+   //      new mapboxgl.Popup()
+   //          .setLngLat(coordinates)
+   //          .setHTML(description)
+   //          .addTo(map);
+   //  });
+
+   //  // Change the cursor to a pointer when the mouse is over the places layer.
+   //  map.on('mouseenter', 'buildingEnvelopes', function () {
+   //      map.getCanvas().style.cursor = 'pointer';
+   //  });
+
+   //  // Change it back to a pointer when it leaves.
+   //  map.on('mouseleave', 'buildingEnvelopes', function () {
+   //      map.getCanvas().style.cursor = '';
+   //  });
 
 
 
-// Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.NavigationControl());
-// When a click event occurs near a polygon, open a popup at the location of
-// the feature, with description HTML from its properties.
-map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['Iteration1','Iteration2','Iteration3','Iteration4','Iteration5','Iteration6'] });
-    if (!features.length) {
-        return;
-    }
-
-    var feature = features[0];
-    var feat = features.length;
-
-    var popup = new mapboxgl.Popup()
-        .setLngLat(map.unproject(e.point))
-        .setHTML(feature.properties.tag)
-        .addTo(map);
-
-// Use the same approach as above to indicate that the symbols are clickable
-// by changing the cursor style to 'pointer'.
-map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['Iteration1','Iteration2','Iteration3','Iteration4','Iteration5'] });
-    map.getCanvas().style.cursor = feat ? 'pointer' : '';
-});
 
 });
 
-
-
-    
